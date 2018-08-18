@@ -1,4 +1,4 @@
-package com.gbouriga.email.service;
+package com.gbouriga.email.sender.service;
 
 import com.gbouriga.email.dto.EmailContent;
 

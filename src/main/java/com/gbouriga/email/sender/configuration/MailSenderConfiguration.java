@@ -1,4 +1,4 @@
-package com.gbouriga.email.service.configuration;
+package com.gbouriga.email.sender.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

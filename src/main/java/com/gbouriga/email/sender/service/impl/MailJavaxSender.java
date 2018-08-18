@@ -1,7 +1,7 @@
-package com.gbouriga.email.service.impl;
+package com.gbouriga.email.sender.service.impl;
 
 import com.gbouriga.email.dto.EmailContent;
-import com.gbouriga.email.service.MailSender;
+import com.gbouriga.email.sender.service.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
