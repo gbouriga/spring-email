@@ -13,7 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class MailJavaxSender implements MailSender {
+public class MailJavaxSenderImpl implements MailSender {
 
     @Autowired
     private Session javaxMailSender;
@@ -26,7 +26,7 @@ public class MailJavaxSender implements MailSender {
             message.setFrom(new InternetAddress(emailContent.getFrom()));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailContent.getTo()));
             message.setSubject(emailContent.getSubject());
-            message.setText(emailContent.getText());
+            message.setText(emailContent.getBody());
             Transport.send(message);
         } catch (MessagingException mex) {
             mex.printStackTrace();
@@ -45,7 +45,7 @@ public class MailJavaxSender implements MailSender {
             message.setFrom(new InternetAddress(emailContent.getFrom()));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailContent.getTo()));
             message.setSubject(emailContent.getSubject());
-            message.setText(emailContent.getText(), "text/html");
+            message.setText(emailContent.getBody(), "text/html");
             Transport.send(message);
         } catch (MessagingException mex) {
             mex.printStackTrace();

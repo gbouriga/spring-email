@@ -17,7 +17,7 @@ public class EmailContent {
 
     private String subject;
 
-    private String text;
+    private String body;
 
     private List<String> attachments;
 

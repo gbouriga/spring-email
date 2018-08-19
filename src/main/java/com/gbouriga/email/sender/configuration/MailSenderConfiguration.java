@@ -23,15 +23,42 @@ public class MailSenderConfiguration {
     @Value("${email.server.password:}")
     private String password;
 
+
+    //if need backup server when the first one is down
+    @Value("${email.server.host.backup:}")
+    private String hostBackup;
+
+    @Value("${email.server.port.backup:587}")
+    private int portBackup;
+
+    @Value("${email.server.username.backup:}")
+    private String usernameBackup;
+
+    @Value("${email.server.password.backup:}")
+    private String passwordBackup;
+
+    @Value("${email.server.host.backup.active:false}")
+    private boolean isbackupActive;
+
+
     @Bean
     public JavaMailSenderImpl getSpringMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-        mailSender.setHost(host);
-        mailSender.setPort(port);
+        if (!isbackupActive) {
+            mailSender.setHost(host);
+            mailSender.setPort(port);
 
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
+            mailSender.setUsername(username);
+            mailSender.setPassword(password);
+        } else {
+            mailSender.setHost(hostBackup);
+            mailSender.setPort(portBackup);
+
+            mailSender.setUsername(usernameBackup);
+            mailSender.setPassword(passwordBackup);
+        }
+
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
@@ -41,6 +68,7 @@ public class MailSenderConfiguration {
 
         return mailSender;
     }
+
 
     @Bean
     public Session getJavaxMailSender() {

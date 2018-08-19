@@ -13,7 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class MailSpringSender implements MailSender {
+public class MailSpringSenderImpl implements MailSender {
 
     @Autowired
     private JavaMailSender springMailSender;
@@ -24,7 +24,7 @@ public class MailSpringSender implements MailSender {
         message.setFrom(emailContent.getFrom());
         message.setTo(emailContent.getTo());
         message.setSubject(emailContent.getSubject());
-        message.setText(emailContent.getText());
+        message.setText(emailContent.getBody());
         springMailSender.send(message);
     }
 
@@ -61,9 +61,9 @@ public class MailSpringSender implements MailSender {
             helper.setTo(emailContent.getTo());
             helper.setSubject(emailContent.getSubject());
             if (isHtmlHelper) {
-                helper.setText((emailContent.getText()), true);
+                helper.setText((emailContent.getBody()), true);
             } else {
-                helper.setText(emailContent.getText());
+                helper.setText(emailContent.getBody());
             }
         } catch (MessagingException e) {
             e.printStackTrace();
